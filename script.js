@@ -31,7 +31,7 @@ const getColor = (colorName) => {
         "черный": "black",
     };
 
-    return colors[colorName] || "gray";
+    return colors[colorName.toLowerCase()] || "gray";
 };
 
 const display = (fruits) => {
@@ -108,11 +108,11 @@ const filterFruits = () => {
 
 filterButton.addEventListener('click', filterFruits);
 
-const colorPriority = ["Красный", "розово-красный", "оранжевый", "желтый", "зеленый", "светло-коричневый", "фиолетовый"];
+const colorPriority = ["красный", "розово-красный", "оранжевый", "желтый", "зеленый", "светло-коричневый", "фиолетовый"];
 
 const comparationColor = (a, b) => {
-    let indexA = colorPriority.indexOf(a.color);
-    let indexB = colorPriority.indexOf(b.color);
+    let indexA = colorPriority.indexOf(a.color.toLowerCase());
+    let indexB = colorPriority.indexOf(b.color.toLowerCase());
 
     if (indexA === -1) indexA = 999;
     if (indexB === -1) indexB = 999;
