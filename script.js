@@ -80,6 +80,7 @@ const shuffleFruits = () => {
     const isSameOrder = originalOrder.every((fruit, index) => fruit === fruits[index]);
     if (isSameOrder) {
         alert('Порядок не изменился, попробуйте еще раз!');
+        return;
     }
 
 };
@@ -88,12 +89,15 @@ const shuffleFruits = () => {
 shuffleButton.addEventListener('click', () => {
     shuffleFruits();
     display(fruits);
+
 })
 
 
 const filterFruits = () => {
-    const minWeight = parseFloat(document.querySelector('.minweight__input').value.trim());
-    const maxWeight = parseFloat(document.querySelector('.maxweight__input').value.trim());
+    const minWeightInput = document.querySelector('.minweight__input');
+    const maxWeightInput = document.querySelector('.maxweight__input');
+    const minWeight = parseFloat(minWeightInput.value.trim());
+    const maxWeight = parseFloat(maxWeightInput.value.trim());
 
     if (isNaN(minWeight) || isNaN(maxWeight) || minWeight > maxWeight) {
         alert('Введите корректное значение для фильтрации!');
@@ -101,6 +105,9 @@ const filterFruits = () => {
     }
 
     const filteredFruits = fruits.filter(fruit => fruit.weight >= minWeight && fruit.weight <= maxWeight);
+
+    minWeightInput.value = '';
+    maxWeightInput.value = '';
 
     display(filteredFruits);
 }
@@ -152,7 +159,7 @@ const sortAndMeasureTime = (arr, comparation) => {
         bubbleSort(arr, comparation);
     } else {
         fruits = quickSort(arr, comparation);
-    }
+    } 
 
     const end = performance.now();
     return `${(end - start).toFixed(2)} ms`;
@@ -174,9 +181,9 @@ sortActionButton.addEventListener('click', () => {
 let sortKind = 'bubbleSort';
 sortKindLabel.textContent = sortKind;
 sortChangeButton.addEventListener('click', () => {
+    sortTimeLabel.textContent = '';
     sortKind = sortKind === 'bubbleSort' ? 'quickSort' : 'bubbleSort';
     sortKindLabel.textContent = sortKind;
-    sortTimeLabel.textContent = '';
 })
 
 
